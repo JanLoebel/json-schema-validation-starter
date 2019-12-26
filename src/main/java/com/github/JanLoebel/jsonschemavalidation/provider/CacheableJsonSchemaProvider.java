@@ -8,28 +8,18 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CacheableJsonSchemaProvider extends DefaultJsonSchemaProvider {
 
     private final Map<String, JsonSchema> cache = new ConcurrentHashMap<>();
-    private final String basePath;
-
-    public CacheableJsonSchemaProvider(String basePath) {
-        this.basePath = basePath;
-    }
-
-    public CacheableJsonSchemaProvider() {
-        this("");
-    }
 
     @Override
     public JsonSchema loadSchema(String url) {
-        final String fullPath = basePath + url;
-        if (cache.containsKey(fullPath)) {
-            return cache.get(fullPath);
+        if (cache.containsKey(url)) {
+            return cache.get(url);
         }
 
-        return putToCache(fullPath, super.loadSchema(fullPath));
+        return putToCache(url, super.loadSchema(url));
     }
 
-    private JsonSchema putToCache(String fullPath, JsonSchema jsonSchema) {
-        cache.put(fullPath, jsonSchema);
+    private JsonSchema putToCache(String url, JsonSchema jsonSchema) {
+        cache.put(url, jsonSchema);
         return jsonSchema;
     }
 
