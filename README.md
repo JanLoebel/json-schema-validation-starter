@@ -2,6 +2,8 @@
 
 This provides a Spring-Boot-Starter to include JsonSchemaValidation with the help of the [https://github.com/networknt/json-schema-validator](https://github.com/networknt/json-schema-validator) -library.
 
+<a href="https://www.buymeacoffee.com/JanLoebel" rel="Buy me a coffee!">![Foo](https://cdn.buymeacoffee.com/buttons/default-orange.png)</a>
+
 ## Usage
 
 Include the starter into you're project.
