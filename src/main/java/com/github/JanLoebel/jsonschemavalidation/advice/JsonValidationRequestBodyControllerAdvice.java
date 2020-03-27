@@ -35,7 +35,8 @@ public class JsonValidationRequestBodyControllerAdvice implements RequestBodyAdv
     @Override
     public boolean supports(MethodParameter parameter,
                             Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return parameter.getNestedParameterType().isAnnotationPresent(JsonSchemaValidation.class);
+        return parameter.hasParameterAnnotation(JsonSchemaValidation.class) ||
+                parameter.getNestedParameterType().isAnnotationPresent(JsonSchemaValidation.class);
     }
 
     @Override
@@ -53,8 +54,14 @@ public class JsonValidationRequestBodyControllerAdvice implements RequestBodyAdv
     }
 
     private String extractSchemaUri(MethodParameter parameter) {
-        final JsonSchemaValidation annotation =
-                parameter.getNestedParameterType().getAnnotation(JsonSchemaValidation.class);
+        final JsonSchemaValidation annotation;
+        if (parameter.hasParameterAnnotation(JsonSchemaValidation.class)) {
+            annotation = parameter.getParameterAnnotation(JsonSchemaValidation.class);
+        } else if (parameter.getNestedParameterType().isAnnotationPresent(JsonSchemaValidation.class)) {
+            annotation = parameter.getNestedParameterType().getAnnotation(JsonSchemaValidation.class);
+        } else {
+            throw new IllegalArgumentException(String.valueOf(parameter));
+        }
         return annotation.value();
     }
 

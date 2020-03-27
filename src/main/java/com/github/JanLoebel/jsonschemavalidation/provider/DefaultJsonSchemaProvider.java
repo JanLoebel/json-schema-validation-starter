@@ -2,12 +2,10 @@ package com.github.JanLoebel.jsonschemavalidation.provider;
 
 import com.networknt.schema.*;
 import com.github.JanLoebel.jsonschemavalidation.JsonSchemaValidationException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Collection;
 
 public class DefaultJsonSchemaProvider implements JsonSchemaProvider {
@@ -44,8 +42,12 @@ public class DefaultJsonSchemaProvider implements JsonSchemaProvider {
                 // TODO validate this
                 return new FileInputStream(new File(url));
             }
+            if (url.toLowerCase().startsWith("classpath:")) {
+                return new ClassPathResource(url.substring("classpath:".length())).getInputStream();
+            }
+
             return new FileInputStream(ResourceUtils.getFile(url));
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new IllegalStateException("Could not load url: " + url, e);
         }
     }
