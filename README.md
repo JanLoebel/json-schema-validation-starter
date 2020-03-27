@@ -38,6 +38,20 @@ public class Book {
 }
 ```
 
+Alternatively, you need to add this annotation in your controller like below. This is helpful when you generate your classes from a schema or can't edit them.
+
+```
+@RestController
+@RequestMapping("/books")
+public BooksConroller {
+     @PostMapping
+     public ResponseEntity<Book> createBook(@RequestBody @JsonSchemaValidation("classpath:jsonschema/book.json") Book bookDto) {
+        //...
+        return bookDto;
+    }
+}
+```
+
 ## Example project
 Head over to [http://github.com/JanLoebel/json-schema-validation-starter-example](http://github.com/JanLoebel/json-schema-validation-starter-example) to checkout the sample project.
 
