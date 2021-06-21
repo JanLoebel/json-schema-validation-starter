@@ -85,7 +85,7 @@ public class JsonValidationRequestBodyControllerAdvice implements RequestBodyAdv
     }
 
     private InputStream fromString(String body) {
-        return new ByteArrayInputStream(body.getBytes());
+        return new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
     }
 
     private HttpInputMessage buildHttpInputMessage(String body, HttpHeaders httpHeaders) {
