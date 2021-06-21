@@ -9,3 +9,6 @@ target
 
 # IntelliJ
 *.iml
+
+# Vscode
+.history
