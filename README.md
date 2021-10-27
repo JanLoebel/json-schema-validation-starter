@@ -52,6 +52,28 @@ public BooksConroller {
 }
 ```
 
+The schemas are read by a bean that implements the `JsonSchemaProvider` interface. By default, the `DefaultJsonSchemaProvider` is used, which can load schemas by a URL or from the classpath. If necessary, a custom schema provider can be implemented and configured:
+
+```
+@ConditionalOnProperty(prefix = "json.schema.validation", name = "schemaProvider", havingValue = "custom")
+@Component
+public class CustomJsonSchemaProvider implements JsonSchemaProvider {
+     JsonSchema loadSchema(String url) {
+         // Create and return a JSON schema...
+     }
+
+    void handleValidationMessages(Collection<ValidationMessage> validationMessages) {
+         // Handle validation messages...
+    }
+}
+```
+
+Configure the schema provider in `application.properties`:
+
+```
+json.schema.validation.schemaProvider=custom
+```
+
 ## Example project
 Head over to [http://github.com/JanLoebel/json-schema-validation-starter-example](http://github.com/JanLoebel/json-schema-validation-starter-example) to checkout the sample project.
 
