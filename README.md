@@ -18,14 +18,14 @@ You need to add jitpack to your `pom.xml` because this project is not available 
 </repositories>
 ```
 
-_Note_: For Spring Boot < 3.0 please use 2.3.0, otherwise use 3.0.0 for Spring Boot >= 3.0.
+_Note_: For Spring Boot < 3.0 please use 2.3.0, otherwise use 3.x.x for Spring Boot >= 3.0.
 
 Add the `json-schema-validation-starter`-dependency to your `pom.xml`
 ```
 <dependency>
     <groupId>com.github.JanLoebel</groupId>
     <artifactId>json-schema-validation-starter</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
 </dependency>
 ```
 
