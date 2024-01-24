@@ -11,7 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <spring-boot.version>3.0.0</spring-boot.version>
-        <json-schema-validator.version>1.0.49</json-schema-validator.version>
+        <json-schema-validator.version>1.2.0</json-schema-validator.version>
     </properties>
 
     <dependencyManagement>
